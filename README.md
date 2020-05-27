@@ -8,5 +8,5 @@ Black-Scholes option pricing model using gaussian assumptions. This program uses
 * Get live data-feed
 * Estimation of IV
 ## Resources
-*Exotic Options and Hybrids
-*[Gaussian estimation](https://introcs.cs.princeton.edu/java/21function/Gaussian.java.html)
+* Exotic Options and Hybrids
+* [Gaussian estimation](https://introcs.cs.princeton.edu/java/21function/Gaussian.java.html)
