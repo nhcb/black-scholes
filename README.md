@@ -1,4 +1,4 @@
-# black-scholes
+# black-scholes in Java
 Black-Scholes option pricing model using gaussian assumptions. This program uses contracts, which makes it easy to introduce option strategies as this is further developed.
 ## Wishlist
 * Other option strategies
