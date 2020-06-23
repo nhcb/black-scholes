@@ -4,9 +4,11 @@ Black-Scholes option pricing model using gaussian assumptions. This program uses
 * Other option strategies
 * Pricing of American options using for example non linear volatility equations as seen [here](https://arxiv.org/pdf/1707.00358.pdf)
 * Handling the volatility skew
-* JavaFX interface
+* JavaFX interface (done)
 * Get live data-feed
-* Estimation of IV
+* Estimation of IV using volatility models
+  * Implement maximisation algorithms
+  * Implement models as in [Volatility modeling](docs/vm.pdf)
 ## Resources
 * Exotic Options and Hybrids
 * [Gaussian estimation](https://introcs.cs.princeton.edu/java/21function/Gaussian.java.html)
