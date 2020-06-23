@@ -10,3 +10,5 @@ Black-Scholes option pricing model using gaussian assumptions. This program uses
 ## Resources
 * Exotic Options and Hybrids
 * [Gaussian estimation](https://introcs.cs.princeton.edu/java/21function/Gaussian.java.html)
+## Screenshots
+![Alt text](images/voorbeeld.png?raw=true "Title")
