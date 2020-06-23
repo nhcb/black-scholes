@@ -15,12 +15,12 @@ public class CallSpread extends Contract {
 		this.STRIKE2 = STRIKE2;
 	}
 	@Override
-	public void calculate() {
+	public void calculateBS() {
 		//TODO:Determine bullish or bearish call spread
 		Contract buy = new Call(STOCK, STRIKE, RATE, TIME, VOLATILITY, DIV);
 		Contract sell = new Call(STOCK, STRIKE2, RATE, TIME, VOLATILITY, DIV);
-		buy.calculate();
-		sell.calculate();
+		buy.calculateBS();
+		sell.calculateBS();
 		 //Spread price
     	PRICE = buy.getOptionValue()-sell.getOptionValue();
         //Greeks

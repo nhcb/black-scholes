@@ -1,5 +1,6 @@
 package contract;
 
+import tools.MonteCarlo;
 
 public class Contract {
 	
@@ -34,9 +35,25 @@ public class Contract {
         this.TIME = TIME;
         this.VOLATILITY = VOLATILITY;
     }
-	public void calculate(){
+	public void calculateBS(){
 
     }
+	public void calculateMC(int nStep,int nSim) {
+
+	}
+	public double[][] generateStockPricesMC(int nStep,int nSim){
+		int n=0;
+    	double data[][]= new double[nStep][nSim];
+    	while(n < nSim) {
+    		//Exercise our right when stock STOCK-STRIKE has increased by RETURN
+    		double col[] = MonteCarlo.generateStockPrices(nStep, STOCK, RATE, TIME, VOLATILITY, DIV);
+    		for(int i =0;i < nStep;i ++) {
+    			data[i][n] = col[i];
+    		}
+    		n++;
+    	}
+    	return data;
+	}
     public double getOptionValue() {
         return PRICE;
     }

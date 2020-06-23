@@ -1,6 +1,7 @@
 package contract;
 
 import tools.Gaussian;
+import tools.MonteCarlo;
 
 public class Call extends Contract {
 
@@ -18,7 +19,7 @@ public class Call extends Contract {
      * @param DIV
      */
     @Override
-    public void calculate(){
+    public void calculateBS(){
         //Option price
     	PRICE = STOCK * Gaussian.cdf(d1()) - STRIKE * Math.exp(-RATE *TIME) * Gaussian.cdf(d2());
         //Greeks
@@ -28,9 +29,23 @@ public class Call extends Contract {
         
         THETA = (-(STOCK * Gaussian.pdf(d1()) * VOLATILITY)) / (2 * Math.sqrt(TIME)) - (RATE * STRIKE * Math.exp(-RATE * TIME) * Gaussian.cdf(d2()));
         VEGA = STOCK * Gaussian.pdf(d1())*Math.sqrt(TIME);
-        RHO =  STRIKE*TIME*Math.exp(-RATE*TIME)*Gaussian.cdf(d2());
-       
+        RHO =  STRIKE*TIME*Math.exp(-RATE*TIME)*Gaussian.cdf(d2());  
     }
+    @Override
+    public void calculateMC(int nStep,int nSim) {
+    	int n=0;
+    	double totalPayoff=0;
+    	double averagePayoff;
+    	while(n < nSim) {
+    		//Exercise our right when stock STOCK-STRIKE has increased by RETURN
+    		totalPayoff += MonteCarlo.generatePayoffs(nStep, STOCK, STRIKE, RATE, TIME, VOLATILITY, DIV, 0.1);
+    		n++;
+    	}
+    	averagePayoff = totalPayoff/nSim;
+    	//Calculate option value PRESENT VALUE
+    	PRICE = averagePayoff;///(Math.pow(1+RATE,TIME));
+    }
+    
     private double d1() {
         return (Math.log(STOCK / STRIKE) + ((Math.pow(VOLATILITY, 2) * TIME) / 2)) / (Math.pow(TIME, 0.5) * VOLATILITY);
     }

@@ -1,6 +1,7 @@
 package contract;
 
 import tools.Gaussian;
+import tools.MonteCarlo;
 
 public class Put extends Contract {
 
@@ -9,7 +10,7 @@ public class Put extends Contract {
 	}
 
 	@Override
-	public void calculate(){
+	public void calculateBS(){
         //Option price
     	PRICE = STRIKE * Gaussian.cdf(-d2()) - STOCK * Math.exp(-RATE *TIME) * Gaussian.cdf(-d1());
         //Greeks
@@ -22,6 +23,20 @@ public class Put extends Contract {
         RHO =  -STRIKE*TIME*Math.exp(-RATE*TIME)*Gaussian.cdf(-d2());
        
     }
+	 @Override
+	    public void calculateMC(int nStep,int nSim) {
+	    	int n=0;
+	    	double totalPayoff=0;
+	    	double averagePayoff;
+	    	while(n < nSim) {
+	    		//Exercise our right when stock STOCK-STRIKE has increased by RETURN
+	    		totalPayoff += MonteCarlo.generatePayoffs(nStep, STOCK, STRIKE, RATE, TIME, VOLATILITY, DIV, 0.1);
+	    		n++;
+	    	}
+	    	averagePayoff = totalPayoff/nSim;
+	    	//Calculate option value PRESENT VALUE
+	    	PRICE = averagePayoff;///(Math.pow(1+RATE,TIME));
+	    }
     private double d1() {
         return (Math.log(STOCK / STRIKE) + ((Math.pow(VOLATILITY, 2) * TIME) / 2)) / (Math.pow(TIME, 0.5) * VOLATILITY);
     }

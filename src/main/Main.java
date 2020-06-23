@@ -15,11 +15,11 @@ public class Main  {
     	double time = (double) 28/365; 
     	double div = 0;
        Contract callExample = new Call(underlying,callPrice,rate,time,volatility,div);
-       callExample.calculate();
+       callExample.calculateBS();
        Contract putExample = new Put(underlying,putPrice,rate,time,volatility,div);
-       putExample.calculate();
+       putExample.calculateBS();
        Contract callSpreadExample = new CallSpread(underlying,putPrice,callPrice,rate,time,volatility,div);
-       callSpreadExample.calculate();
+       callSpreadExample.calculateBS();
        
        System.out.println("Call: ");
        System.out.println(callExample.toString());
@@ -28,6 +28,4 @@ public class Main  {
        System.out.println("Call Spread: ");
        System.out.println(callSpreadExample.toString());
     }
-
-
 }

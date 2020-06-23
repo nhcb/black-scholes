@@ -14,12 +14,12 @@ private double STRIKE2;
 		this.STRIKE2 = STRIKE2;
 	}
 	
-	public void calculate() {
+	public void calculateBS() {
 		//TODO:Determine bullish or bearish call spread
 		Contract buy = new Put(STOCK, STRIKE, RATE, TIME, VOLATILITY, DIV);
 		Contract sell = new Put(STOCK, STRIKE2, RATE, TIME, VOLATILITY, DIV);
-		buy.calculate();
-		sell.calculate();
+		buy.calculateBS();
+		sell.calculateBS();
 		 //Spread price
     	PRICE = buy.getOptionValue()-sell.getOptionValue();
         //Greeks
